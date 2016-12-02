@@ -19,8 +19,8 @@ Run a command of the following format where h and w are integers:
 ```
 $ java MazeRenderer h w
 ```
-The program will launch in a separate window with a maze of height h*2-1 and
-width w*2-1. This is a result of internal representations of the maze.
+The program will launch in a separate window with a maze of height h\*2-1 and
+width w\*2-1. This is a result of internal representations of the maze.
 
 Controls
 ===============
