@@ -161,7 +161,7 @@ public class MazeRenderer extends Application {
                     case DOWN:
                     case J:
                         System.out.println("move down");
-                        if(cursorY < maze[0].length && maze[cursorX][cursorY+1] == Maze.PATH) {
+                        if(cursorY < maze[0].length-1 && maze[cursorX][cursorY+1] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
                             cursorY++;
                             drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
@@ -179,7 +179,7 @@ public class MazeRenderer extends Application {
                     case RIGHT:
                     case L:
                         System.out.println("move right");
-                        if(cursorX < maze.length && maze[cursorX+1][cursorY] == Maze.PATH) {
+                        if(cursorX < maze.length-1 && maze[cursorX+1][cursorY] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
                             cursorX++;
                             drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
