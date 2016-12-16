@@ -148,65 +148,92 @@ public class MazeRenderer extends Application {
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
-                //System.out.println("Key pressed: " + ke);
+                move(ke);
+            }
+
+            private void move(KeyEvent ke) {
                 switch(ke.getCode()) {
                     case LEFT:
                     case H:
                     case A:
-                        //System.out.println("move left");
-                        if(cursorX > 0 && maze[cursorX-1][cursorY] == Maze.PATH) {
-                            clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                            cursorX--;
-                            drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        }
+                        moveLeft(ke);
                         break;
                     case DOWN:
                     case J:
                     case S:
-                        //System.out.println("move down");
-                        if(cursorY < maze[0].length-1 && maze[cursorX][cursorY+1] == Maze.PATH) {
-                            clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                            cursorY++;
-                            drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        }
+                        moveDown(ke);
                         break;
                     case UP:
                     case K:
                     case W:
-                        //System.out.println("move up");
-                        if(cursorY > 0 && maze[cursorX][cursorY-1] == Maze.PATH) {
-                            clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                            cursorY--;
-                            drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        }
+                        moveUp(ke);
                         break;
                     case RIGHT:
                     case L:
                     case D:
-                        //System.out.println("move right");
-                        if(cursorX < maze.length-1 && maze[cursorX+1][cursorY] == Maze.PATH) {
-                            clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                            cursorX++;
-                            drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        }
+                        moveRight(ke);
                         break;
                     case ENTER:
-                        if(cursorX == maze.length-1 && cursorY == maze[0].length-1) {
-                            //System.out.println("new maze");
-                            maze = (new Maze(maze[0].length/2+1, maze.length/2+1, 1)).getFullArray();
-                            drawMaze(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        }
+                        newMaze(ke);
                         break;
                     case R:
-                        clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
-                        cursorX = 0;
-                        cursorY = 0;
-                        drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                        resetCursor(ke);
                         break;
                     case Q:
                         System.exit(0);
                     default:
                 }
+            }
+
+            private void moveLeft(KeyEvent ke) {
+                //System.out.println("move left");
+                if(cursorX > 0 && maze[cursorX-1][cursorY] == Maze.PATH) {
+                    clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                    cursorX--;
+                    drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                }
+            }
+
+            private void moveDown(KeyEvent ke) {
+                //System.out.println("move down");
+                if(cursorY < maze[0].length-1 && maze[cursorX][cursorY+1] == Maze.PATH) {
+                    clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                    cursorY++;
+                    drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                }
+            }
+
+            private void moveUp(KeyEvent ke) {
+                //System.out.println("move up");
+                if(cursorY > 0 && maze[cursorX][cursorY-1] == Maze.PATH) {
+                    clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                    cursorY--;
+                    drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                }
+            }
+
+            private void moveRight(KeyEvent ke) {
+                //System.out.println("move right");
+                if(cursorX < maze.length-1 && maze[cursorX+1][cursorY] == Maze.PATH) {
+                    clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                    cursorX++;
+                    drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                }
+            }
+
+            private void newMaze(KeyEvent ke) {
+                if(cursorX == maze.length-1 && cursorY == maze[0].length-1) {
+                    //System.out.println("new maze");
+                    maze = (new Maze(maze[0].length/2+1, maze.length/2+1, 1)).getFullArray();
+                    drawMaze(((Canvas)ke.getSource()).getGraphicsContext2D());
+                }
+            }
+
+            private void resetCursor(KeyEvent ke) {
+                clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                cursorX = 0;
+                cursorY = 0;
+                drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
             }
         });
     }
