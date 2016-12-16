@@ -133,12 +133,13 @@ public class MazeRenderer extends Application {
     /**
      * Adds the control handling to the passed canvas.
      * <ul>
-     * <li>h and left move the cursor left
-     * <li>j and down move the cursor down
-     * <li>k and up move the cursor up
-     * <li>l and right move the cursor right
+     * <li>h, a,  and left move the cursor left
+     * <li>j, s,  and down move the cursor down
+     * <li>k, w,  and up move the cursor up
+     * <li>l, d,  and right move the cursor right
      * <li>enter creates a new maze and resets the cursor if the cursor is on the
      * goal
+     * <li>r resets the cursor position
      * <li>q quits the program
      * <li>all other input is ignored
      * </ul>
@@ -151,6 +152,7 @@ public class MazeRenderer extends Application {
                 switch(ke.getCode()) {
                     case LEFT:
                     case H:
+                    case A:
                         //System.out.println("move left");
                         if(cursorX > 0 && maze[cursorX-1][cursorY] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
@@ -160,6 +162,7 @@ public class MazeRenderer extends Application {
                         break;
                     case DOWN:
                     case J:
+                    case S:
                         //System.out.println("move down");
                         if(cursorY < maze[0].length-1 && maze[cursorX][cursorY+1] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
@@ -169,6 +172,7 @@ public class MazeRenderer extends Application {
                         break;
                     case UP:
                     case K:
+                    case W:
                         //System.out.println("move up");
                         if(cursorY > 0 && maze[cursorX][cursorY-1] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
@@ -178,6 +182,7 @@ public class MazeRenderer extends Application {
                         break;
                     case RIGHT:
                     case L:
+                    case D:
                         //System.out.println("move right");
                         if(cursorX < maze.length-1 && maze[cursorX+1][cursorY] == Maze.PATH) {
                             clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
@@ -191,6 +196,12 @@ public class MazeRenderer extends Application {
                             maze = (new Maze(maze[0].length/2+1, maze.length/2+1, 1)).getFullArray();
                             drawMaze(((Canvas)ke.getSource()).getGraphicsContext2D());
                         }
+                        break;
+                    case R:
+                        clearCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
+                        cursorX = 0;
+                        cursorY = 0;
+                        drawCursor(((Canvas)ke.getSource()).getGraphicsContext2D());
                         break;
                     case Q:
                         System.exit(0);
